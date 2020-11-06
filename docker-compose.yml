@@ -1,9 +1,12 @@
+# composeファイルのバージョン
 version: '3'
+# アプリケーションを動かすための各要素
 services:
   db:
     image: mysql:5.7
     environment:
       MYSQL_DATABASE: root
+      # rootユーザに空のパスワードを設定してコンテナを起動することを許可
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     ports:
       - "3306:3306"
@@ -15,10 +18,12 @@ services:
 
   web:
     build: .
+    #ローカルサーバーを立ち上げ流コマンド
     command: rails s -p 3000 -b '0.0.0.0'
     volumes:
       - .:/app_name
     ports:
       - "3000:3000"
+    #db(mysql)にアクセスする
     links:
       - db

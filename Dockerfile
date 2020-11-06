@@ -11,7 +11,7 @@ RUN apt-get update -qq && \
 
 # 作業ディレクトリの作成、設定
 RUN mkdir /app_name
-##作業ディレクトリ名をAPP_ROOTに割り当て 以下$APP_ROOTで参照
+# 作業ディレクトリ名をAPP_ROOTに割り当て 以下$APP_ROOTで参照
 ENV APP_ROOT /app_name
 WORKDIR $APP_ROOT
 
