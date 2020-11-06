@@ -16,11 +16,12 @@ ENV APP_ROOT /app_name
 WORKDIR $APP_ROOT
 
 # ホスト側（ローカル）のGemfileを追加する
-ADD ./Gemfile $APP_ROOT/Gemfile
-ADD ./Gemfile.lock $APP_ROOT/Gemfile.lock
+ADD Gemfile Gemfile.lock package.json yarn.lock $APP_ROOT/
 
 # Gemfileのbundle install
-RUN bundle install
+# gem のバージョンが変わった場合、ビルドし直せるように、ここで変更を検知する。
+RUN gem update --system && gem install bundler:2.1.4
+RUN RAILS_ENV=development bundle install && yarn install --frozen-lockfile
 ADD . $APP_ROOT
 
 # おまじない
