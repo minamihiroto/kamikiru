@@ -1,10 +1,12 @@
-<h1>ログインアプリ</h1>
+<h1>ユーザー一覧</h1>
 
 <% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
   <!-- ユーザーがログインしていた時の処理 -->
-  <h2> 現在 <%= current_user.name %> さんがログインしています </h2> <!-- ここを追加します -->
-  <h4> メールアドレス： <%= current_user.email %> </h4>
-  <%= link_to "ユーザー一覧", comments_main_path %>
+  <% @users.each do |user| %>
+    <h4> 名前： <%= user.name %> </h4>
+    <h4> メールアドレス： <%= user.email %> </h4>
+  <%end%>
+  <%= link_to "プロフィール", root_path %>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
 <% else %>
   <!-- ユーザーがログインしていなかった時の処理 -->
