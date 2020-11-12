@@ -16,6 +16,11 @@
   <!-- ここまで追加してください -->
 
   <div class="field">
+    <%= f.label :images %> <br />
+    <%= f.file_field :images, multiple: true %>
+  </div>
+
+  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>

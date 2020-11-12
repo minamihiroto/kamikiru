@@ -3,6 +3,7 @@
 <% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
   <!-- ユーザーがログインしていた時の処理 -->
   <% @users.each do |user| %>
+    <%= user.images %>
     <h4> 名前： <%= user.name %> </h4>
     <h4> メールアドレス： <%= user.email %> </h4>
   <%end%>

@@ -4,8 +4,8 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :images %> <br />
+    <%= f.file_field :images, multiple: true %>
   </div>
 
   <!-- ここから追記 -->
@@ -14,6 +14,11 @@
     <%= f.text_field :name %>
   </div>
   <!-- ここまで追記 -->
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
