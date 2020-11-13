@@ -3,12 +3,16 @@
 <% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
   <!-- ユーザーがログインしていた時の処理 -->
   <% @users.each do |user| %>
-    <% user.images.each do |image| %>
-      <%= image_tag image %>
+    <% if user == current_user %>
+    <%# 自分を非表示にする %>
+    <% else %>
+      <% user.images.each do |image| %>
+        <%= image_tag image %>
+      <% end %>
+      <h4> 名前： <%= user.name %> </h4>
+      <h4> メールアドレス： <%= user.email %> </h4>
     <% end %>
-    <h4> 名前： <%= user.name %> </h4>
-    <h4> メールアドレス： <%= user.email %> </h4>
-  <%end%>
+  <% end %>
   <%= link_to "プロフィール", root_path %>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
 <% else %>
