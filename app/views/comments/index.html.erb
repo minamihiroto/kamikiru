@@ -3,7 +3,9 @@
 <% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
   <!-- ユーザーがログインしていた時の処理 -->
   <h2> 現在 <%= current_user.name %> さんがログインしています </h2> <!-- ここを追加します -->
-  <%= current_user.images %>
+  <% current_user.images.each do |image| %>
+    <%= image_tag image %>
+  <% end %>
   <h4> メールアドレス： <%= current_user.email %> </h4>
   <%= link_to "プロフィール編集",  edit_user_registration_path %>
   <%= link_to "ユーザー一覧", comments_main_path %>
