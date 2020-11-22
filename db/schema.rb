@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_092833) do
+ActiveRecord::Schema.define(version: 2020_11_22_105923) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(version: 2020_11_10_092833) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "machings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "マッチングテーブル", force: :cascade do |t|
+    t.bigint "request_user_id", comment: "リクエストしたユーザー"
+    t.bigint "requested_user_id", comment: "リクエストされたユーザー"
+    t.boolean "aggree", default: false, comment: "承諾可否"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["request_user_id", "requested_user_id"], name: "index_machings_on_request_user_id_and_requested_user_id", unique: true
+    t.index ["request_user_id"], name: "index_machings_on_request_user_id"
+    t.index ["requested_user_id"], name: "index_machings_on_requested_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -47,4 +58,6 @@ ActiveRecord::Schema.define(version: 2020_11_10_092833) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "machings", "users", column: "request_user_id"
+  add_foreign_key "machings", "users", column: "requested_user_id"
 end
