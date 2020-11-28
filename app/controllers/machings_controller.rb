@@ -28,6 +28,6 @@ class MachingsController < ApplicationController
     private
     def set_user
         # リクエストされるユーザーのデータが入る
-        @user = User.find params[:request_id]
+        @user = User.find params[:request_user_id]
     end
 end
