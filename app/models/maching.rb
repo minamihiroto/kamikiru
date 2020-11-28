@@ -6,4 +6,12 @@ class Maching < ApplicationRecord
     # presence: trueで空データを登録できないようにする
     validates :request_user_id, presence: true
     validates :requested_user_id, presence: true
+    
+    def self.request_user(user)
+        where(request_user_id: user.id)
+    end
+
+    def self.requested_user(user)
+        where(requested_user_id: user.id)
+    end
 end
