@@ -6,11 +6,17 @@
     <% if user == current_user %>
     <%# 自分を非表示にする %>
     <% else %>
+      <% if flash[:success] %>
+        <%= flash[:success] %>
+      <% elsif flash[:alert] %>
+        <%= flash[:alert] %>
+      <% end %>
       <% user.images.each do |image| %>
         <%= image_tag image %>
       <% end %>
       <h4> 名前： <%= user.name %> </h4>
       <h4> メールアドレス： <%= user.email %> </h4>
+
     <% end %>
   <% end %>
   <%= link_to "プロフィール", root_path %>
