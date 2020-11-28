@@ -15,8 +15,9 @@
         <%= image_tag image %>
       <% end %>
       <h4> 名前： <%= user.name %> </h4>
-      <h4> メールアドレス： <%= user.email %> </h4>
-
+      <h4> メールアドレス： <%= user.email %> </h4>  
+      <%# 依頼ボタン %>
+      <%= render 'machings/request_button', user: user %>
     <% end %>
   <% end %>
   <%= link_to "プロフィール", root_path %>
