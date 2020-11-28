@@ -17,7 +17,16 @@
       <h4> 名前： <%= user.name %> </h4>
       <h4> メールアドレス： <%= user.email %> </h4>  
       <%# 依頼ボタン %>
-      <%= render 'machings/request_button', user: user %>
+      <% if current_user.requesting?(user) %>
+        <%= "すでに依頼済みです" %>
+      <% else %>
+        <%= render 'machings/request_button', user: user %>
+      <% end %>
+      <% if current_user.requested?(user) %>
+      <% else %>
+        <%= "このユーザーに依頼されています" %>
+        <%= "承認する" %>
+      <% end %>
     <% end %>
   <% end %>
   <%= link_to "プロフィール", root_path %>

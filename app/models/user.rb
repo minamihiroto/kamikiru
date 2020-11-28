@@ -34,6 +34,15 @@ class User < ApplicationRecord
   #   maching.destroy if maching
   # end
 
+  # selfが依頼したユーザー一覧を取得できる
+  def requesting?(other_user)
+    # request_usersは上記のhas_many :request_users, through: :machingsのこと
+    self.request_users.include?(other_user)
+  end
 
+  def requested?(other_user)
+    # request_usersは上記のhas_many :request_users, through: :machingsのこと
+    self.requested_users.include?(other_user)
+  end
 
 end
