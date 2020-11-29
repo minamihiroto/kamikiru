@@ -2,6 +2,7 @@ class MachingsController < ApplicationController
     before_action :set_user
 
     def create
+      # @userはrequestメソッド(user.rbのメソッド)のother_userにはいる（引数に入る）
         requesting = current_user.request(@user)
         if requesting.save
           flash[:success] = 'ユーザーに依頼しました'

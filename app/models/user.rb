@@ -24,7 +24,8 @@ class User < ApplicationRecord
     # selfはこの定義を呼び出したユーザーのこと
     # 自分にリクエスト送らないようにする記述
     unless self == other_user
-      # other_user.idがmachingsのrequested_user_idカラムに存在するなら取得する、存在しないなら新規作成する(保存はしない)
+      # other_user.idがmachingsのrequested_user_idカラムに存在するなら取得する(もう存在するのでsaveができない状態)、存在しないなら新規作成する(保存はしないのでsaveができる状態)
+      # 他のユーザーのidが依頼されたユーザーのidにあったらそのマッチングを取得し、なければマッチング登録すると言うこと
       self.machings.find_or_initialize_by(requested_user_id: other_user.id)
     end
   end
@@ -35,14 +36,15 @@ class User < ApplicationRecord
   #   maching.destroy if maching
   # end
 
-  # selfが依頼したユーザー一覧を取得できる
   def requesting?(other_user)
-    # self.request_users メソッドで取得したいのは、「Selfに依頼されたユーザー」一覧なので、扱われるModelは requested_user
+    # self.request_usersメソッドで取得したいのは、「Selfに依頼されたユーザー」なので、扱われるModelはrequested_user
+    # selfがother_userを依頼済みかどうかがわかる
     self.request_users.include?(other_user)
   end
 
   def requested?(other_user)
-    # self.requested_users メソッドで取得したいのは、「Selfに依頼したユーザー」一覧なので、扱われるModelは request_user
+    # self.requested_usersメソッドで取得したいのは、「Selfに依頼したユーザー」なので、扱われるModelはrequest_user
+    # selfがother_userに依頼されているかどうかがわかる
     self.requested_users.include?(other_user)
   end
 
