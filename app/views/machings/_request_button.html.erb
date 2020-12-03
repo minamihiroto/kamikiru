@@ -1,4 +1,5 @@
 <%= form_for(current_user.machings.build) do |f| %>
+  <%# request_user_idにuser.id(自分じゃないユーザid)のパラメータが入る %>
   <%= hidden_field_tag :request_user_id, user.id %>
   <%= f.submit '依頼する', class: 'btn btn-primary btn-block' %>
 <% end %>
