@@ -1,5 +1,5 @@
 class Maching < ApplicationRecord
-    # belongs_toでusersテーブルとの関係を記述(1対)
+    # belongs_toでusersテーブルとの関係を記述、こっちが1(1対)
     # request_user,requested_userという架空のテーブルを参照しているが、実際はclass_name: 'User'でusersテーブルを参照していることになってる
     belongs_to :request_user, class_name: 'User'
     belongs_to :requested_user, class_name: 'User'

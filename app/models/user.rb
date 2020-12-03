@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many_attached :images
 
-  # has_manyでmachingsテーブルとの関係を記述(多対）
+  # has_manyでmachingsテーブルとの関係を記述、こっちが多(多対）
   # foreign_keyでは、machingsテーブルのrequest_user_idカラムによって紐付けが行われていることを明示しています
   has_many :machings, class_name: 'Maching', foreign_key: :request_user_id
   # reverse_of_machingsはhas_many :machingsと名前を区別するために書いている
