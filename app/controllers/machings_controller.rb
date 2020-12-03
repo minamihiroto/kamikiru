@@ -14,6 +14,8 @@ class MachingsController < ApplicationController
     end
 
     def update
+      # ログインしてるユーザー(requested_user)に依頼したユーザー(request_user)のマッチングを取得
+      # ログインしてるユーザーが中間テーブル(「セルフ（ログインしてるユーザー）に依頼したユーザー」とのマッチング)を呼び出し、依頼してきたユーザーを引数に入れている
       maching = current_user.reverse_of_machings.find_by(request_user_id: params[:id])
       maching.update(aggree: true)
       redirect_to root_path

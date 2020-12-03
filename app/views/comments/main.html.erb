@@ -21,6 +21,7 @@
         <%= "すでに依頼済みです" %>
       <% elsif current_user.requested?(user) %>
         <%= "依頼されています" %>
+        <!-- maching_pathはルートで定義したmachings#updateのパスである -->
         <%= link_to "承認する", maching_path(current_user.reverse_of_machings.find_by(request_user_id: user.id)), method: :put %>
       <% else %>
         <%= render 'machings/request_button', user: user %>
