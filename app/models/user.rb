@@ -49,6 +49,7 @@ class User < ApplicationRecord
   end
 
   def approving?(other_user)
+    # 承認ボタンが押されているかどうかを確認する
     self.reverse_of_machings.find_by(aggree: true)
   end
 end
