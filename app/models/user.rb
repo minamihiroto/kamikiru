@@ -48,4 +48,7 @@ class User < ApplicationRecord
     self.requested_users.include?(other_user)
   end
 
+  def approving?(other_user)
+    self.reverse_of_machings.find_by(aggree: true)
+  end
 end

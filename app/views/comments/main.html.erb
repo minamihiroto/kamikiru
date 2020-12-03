@@ -19,6 +19,8 @@
       <%# 依頼ボタン %>
       <% if current_user.requesting?(user) %>
         <%= "すでに依頼済みです" %>
+      <% elsif current_user.approving?(user) %>
+        <%= "承認済みです" %>
       <% elsif current_user.requested?(user) %>
         <%= "依頼されています" %>
         <!-- maching_pathはルートで定義したmachings#updateのパスである -->
