@@ -10,17 +10,18 @@
   <%= link_to "プロフィール編集",  edit_user_registration_path %>
   <%= link_to "ユーザー一覧", comments_main_path %>
   <%=  "依頼済みのユーザー"%>
-  <!-- 自分が依頼したデータの依頼されたユーザーのnameを取得してる -->
   <% @request_user.each do |user| %>
-    <%= user.requested_user.name %>
+    <%= user.name %>
   <% end %>
   <%= "依頼してきたユーザー" %>
-  <!-- 自分が依頼されたデータの依頼したユーザーのnameを取得してる -->
   <% @requested_user.each do |user| %>
-    <%= user.request_user.name %>
+    <%= user.name %>
   <% end %>
   <%= "マッチング済みユーザー" %>
-  <% @approve.each do |user| %>
+  <% @approve_requested_user.each do |user| %>
+    <%= user.name %>
+  <%end%>
+  <% @approve_request_user.each do |user| %>
     <%= user.name %>
   <%end%>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
