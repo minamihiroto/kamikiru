@@ -7,6 +7,8 @@ class Maching < ApplicationRecord
     validates :request_user_id, presence: true
     validates :requested_user_id, presence: true
 
+    has_many :messages
+
     # user.id(引数に入ったid)でselfのrequest_user_idを参照する
     def self.request_user(user)
         where(request_user_id: user.id)

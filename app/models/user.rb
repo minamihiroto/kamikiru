@@ -20,6 +20,8 @@ class User < ApplicationRecord
   # その場合参照元は(source)はreverse_of_machingsの依頼したユーザーを表しているrequest_userになり、参照先がrequested_usersになる多対多の関係を記述
   has_many :requested_users, through: :reverse_of_machings, source: :request_user
 
+  has_many :messages
+
   def request(other_user)
     # selfはこの定義を呼び出したユーザーのこと
     # 自分にリクエスト送らないようにする記述
