@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_22_105923) do
+ActiveRecord::Schema.define(version: 2020_12_05_140106) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(version: 2020_11_22_105923) do
     t.index ["requested_user_id"], name: "index_machings_on_requested_user_id"
   end
 
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "message_user_id", null: false, comment: "発言するユーザー"
+    t.bigint "message_maching_id", comment: "紐づいているマッチング"
+    t.text "message_content", comment: "メッセージの内容"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["message_maching_id"], name: "index_messages_on_message_maching_id"
+    t.index ["message_user_id"], name: "index_messages_on_message_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -60,4 +70,5 @@ ActiveRecord::Schema.define(version: 2020_11_22_105923) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "machings", "users", column: "request_user_id"
   add_foreign_key "machings", "users", column: "requested_user_id"
+  add_foreign_key "messages", "machings", column: "message_maching_id"
 end
