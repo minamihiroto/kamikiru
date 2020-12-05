@@ -19,6 +19,10 @@
   <% @requested_user.each do |user| %>
     <%= user.request_user.name %>
   <% end %>
+  <%= "マッチング済みユーザー" %>
+  <% @approve.each do |user| %>
+    <%= user.name %>
+  <%end%>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
 <% else %>
   <!-- ユーザーがログインしていなかった時の処理 -->
