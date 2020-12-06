@@ -21,6 +21,16 @@ class MachingsController < ApplicationController
       redirect_to root_path
     end
 
+    def show
+      @maching = Maching.find_by(id: params[:id])
+      if @maching.request_user == current_user || @maching.requested_user == current_user
+        @messages = Message.where(message_maching_id: params[:id])
+        @message = Message.new
+      else
+        redirect_to root_path
+      end
+    end
+
     # 依頼取り消しの機能実装予定はないためコメントアウト
     # def destroy
     #     requesting = current_user.unrequest(@user)
