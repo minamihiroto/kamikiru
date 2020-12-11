@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_05_140106) do
+ActiveRecord::Schema.define(version: 2020_12_10_140028) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -54,6 +54,19 @@ ActiveRecord::Schema.define(version: 2020_12_05_140106) do
     t.index ["message_user_id"], name: "index_messages_on_message_user_id"
   end
 
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "notification_message_id", comment: "DMのメッセージ"
+    t.bigint "notification_user_id", null: false, comment: "通知を受けるユーザー"
+    t.bigint "notification_maching_id", comment: "DMしてる部屋"
+    t.integer "notification_notification_type_id", null: false, comment: "お知らせの種類"
+    t.boolean "notification_read", default: false, comment: "既読判定"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["notification_maching_id"], name: "index_notifications_on_notification_maching_id"
+    t.index ["notification_message_id"], name: "index_notifications_on_notification_message_id"
+    t.index ["notification_user_id"], name: "index_notifications_on_notification_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -71,4 +84,6 @@ ActiveRecord::Schema.define(version: 2020_12_05_140106) do
   add_foreign_key "machings", "users", column: "request_user_id"
   add_foreign_key "machings", "users", column: "requested_user_id"
   add_foreign_key "messages", "machings", column: "message_maching_id"
+  add_foreign_key "notifications", "machings", column: "notification_maching_id"
+  add_foreign_key "notifications", "messages", column: "notification_message_id"
 end
