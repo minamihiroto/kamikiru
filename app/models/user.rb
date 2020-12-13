@@ -39,6 +39,7 @@ class User < ApplicationRecord
   # end
 
   def requesting?(other_user)
+    # ?で終わるメソッドは基本trueかfalseで返して欲しい
     # self.request_usersメソッドで取得したいのは、「Selfに依頼されたユーザー」なので、扱われるModelはrequested_user
     # selfがother_userを依頼済みかどうかがわかる
     self.request_users.include?(other_user)
@@ -47,11 +48,14 @@ class User < ApplicationRecord
   def requested?(other_user)
     # self.requested_usersメソッドで取得したいのは、「Selfに依頼したユーザー」なので、扱われるModelはrequest_user
     # selfがother_userに依頼されているかどうかがわかる
+    # includeはtrueかfaleseを返してくる
     self.requested_users.include?(other_user)
   end
 
   def approving?(other_user)
-    # 承認ボタンが押されているかどうかを確認する
-    self.reverse_of_machings.find_by(aggree: true)
+    # 自分がother_userに承認ボタンが押されているかどうかを確認する
+    # find_byは存在するかしないか（nill）を返す
+    # exists?は存在してたらtrueしてなかったらfalseで返すメソッド
+    self.reverse_of_machings.exists?(request_user: other_user, aggree: true)
   end
 end
