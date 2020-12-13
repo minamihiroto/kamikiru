@@ -4,4 +4,6 @@ class NotificationType < ActiveHash::Base
     {id: 2, name: 'マッチング承認', notify_message: "マッチングが承認されました"}, 
     {id: 3, name: 'メッセージ到着', notify_message: "メッセージが届きました"}, 
   ]
+
+  has_many :notification
 end

@@ -22,6 +22,8 @@ class User < ApplicationRecord
 
   has_many :messages
 
+  has_many :notification
+
   def request(other_user)
     # selfはこの定義を呼び出したユーザーのこと
     # 自分にリクエスト送らないようにする記述
