@@ -7,7 +7,7 @@
     <%= message.message_content %>
   <%end%>
 <%end%>
-
+<%# メッセージを送るフォーム %>
 <%= form_with model: @message do |f| %>
   <%= f.hidden_field :message_user_id, value: current_user.id %>
   <%= f.hidden_field :message_maching_id, value: @maching.id %>
