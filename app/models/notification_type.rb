@@ -4,6 +4,7 @@ class NotificationType < ActiveHash::Base
     {id: 2, name: 'マッチング承認', notify_message: "マッチングが承認されました"}, 
     {id: 3, name: 'メッセージ到着', notify_message: "メッセージが届きました"}, 
   ]
-
-  has_many :notification
+  # ActiveHashクラスから関連付けを作成するために必要なモジュール
+  include ActiveHash::Associations
+  has_many :notifications
 end
