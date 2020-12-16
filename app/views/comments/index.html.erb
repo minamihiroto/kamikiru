@@ -24,6 +24,7 @@
   <% @approve_request_user.each do |user| %>
     <%= user.name %>
   <%end%>
+  <%= link_to "通知", notifications_path %> 
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
 <% else %>
   <!-- ユーザーがログインしていなかった時の処理 -->
