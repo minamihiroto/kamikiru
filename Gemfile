@@ -50,4 +50,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 
+# bundleエラー出たらコメントアウトしてdockerを立ち上げて、中に入ってからbundle installする
 gem 'active_hash'
