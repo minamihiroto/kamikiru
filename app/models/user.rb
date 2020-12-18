@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
   has_many :messages
 
-  has_many :notifications
+  has_many :notifications, foreign_key: :notification_user_id
 
   def request(other_user)
     # selfはこの定義を呼び出したユーザーのこと
