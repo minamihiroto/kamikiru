@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_10_140028) do
+ActiveRecord::Schema.define(version: 2020_12_18_142550) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2020_12_10_140028) do
     t.bigint "notification_message_id", comment: "DMのメッセージ"
     t.bigint "notification_user_id", null: false, comment: "通知を受けるユーザー"
     t.bigint "notification_maching_id", comment: "DMしてる部屋"
-    t.integer "notification_notification_type_id", null: false, comment: "お知らせの種類"
+    t.integer "notification_type_id", null: false
     t.boolean "notification_read", default: false, comment: "既読判定"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
