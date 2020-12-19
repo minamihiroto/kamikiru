@@ -1,6 +1,8 @@
 <%# 自分に向けて発せられた通知を全て表示する %>
 <% current_user.notifications.each do |notice| %>
   <% if notice.notification_read? %>
+    <%= notice.notification_user.name %>
+    <%= "さんから" %>
     <%= notice.notification_type.notify_message %>
   <% else %>
   <%= "未読" %>
@@ -9,3 +11,4 @@
     <%= notice.notification_type.notify_message %>
   <% end %>
 <% end %>
+<%= link_to "プロフィール", root_path %>
