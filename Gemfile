@@ -49,3 +49,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
+
+# エラー出たらdocker-compose buildをまず試すそれでもダメなら↓
+# bundleエラー出たらコメントアウトしてdockerを立ち上げて、中に入ってからbundle installする
+gem 'active_hash'

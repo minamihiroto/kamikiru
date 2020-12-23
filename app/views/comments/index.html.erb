@@ -24,6 +24,12 @@
   <% @approve_request_user.each do |user| %>
     <%= user.name %>
   <%end%>
+  <% if current_user.notifications.where(notification_read: false).present? %>
+    <%= link_to "通知", notifications_path, style: 'color: red;' %>
+    <span style = "color: red;"><%= current_user.notifications.where(notification_read: false).size %></span>
+  <% else %>
+    <%= link_to "通知", notifications_path %>
+  <% end %>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
 <% else %>
   <!-- ユーザーがログインしていなかった時の処理 -->
