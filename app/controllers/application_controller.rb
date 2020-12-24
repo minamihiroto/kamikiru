@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :mark_notification_read!, if: :is_before_notification_pages?
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, images: []]) # 新規登録時(sign_up時)にname,imagesというキーのパラメーターを追加で許可する
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, images: []]) # name,imagesの編集を許可する
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :flag, images: []])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :flag, images: []])
   end
 
   def mark_notification_read!
