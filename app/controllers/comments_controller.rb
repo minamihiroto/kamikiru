@@ -11,6 +11,10 @@ class CommentsController < ApplicationController
   end
 
   def main
-    @users = User.all
+    if current_user.flag
+      @users = User.where(flag: false)
+    else
+      @users = User.where(flag: true)
+    end
   end
 end
