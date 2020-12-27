@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_24_063656) do
+ActiveRecord::Schema.define(version: 2020_12_26_064046) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 2020_12_24_063656) do
     t.index ["request_user_id", "requested_user_id"], name: "index_machings_on_request_user_id_and_requested_user_id", unique: true
     t.index ["request_user_id"], name: "index_machings_on_request_user_id"
     t.index ["requested_user_id"], name: "index_machings_on_requested_user_id"
+  end
+
+  create_table "menus", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false, comment: "（やって欲しいorできる）menuを設定するユーザー"
+    t.string "name", comment: "メニュー名"
+    t.integer "fee", comment: "料金"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_menus_on_user_id"
   end
 
   create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
