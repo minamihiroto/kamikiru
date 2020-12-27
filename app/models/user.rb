@@ -24,6 +24,8 @@ class User < ApplicationRecord
 
   has_many :notifications, foreign_key: :notification_user_id
 
+  has_many :menus
+
   def request(other_user)
     # selfはこの定義を呼び出したユーザーのこと
     # 自分にリクエスト送らないようにする記述
