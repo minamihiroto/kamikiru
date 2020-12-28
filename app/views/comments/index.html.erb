@@ -30,6 +30,21 @@
   <% else %>
     <%= link_to "通知", notifications_path %>
   <% end %>
+  <%= form_with model: @menu, local: true do |f| %>
+    <%= f.label :name, "メニュー名" %>
+    <%= f.text_field :name %>
+    <%= f.label :fee, "金額" %>
+    <%= f.number_field :fee %>
+    <%= f.submit "メニュー作成" %>
+    <% @menu.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  <% end %>
+  <% @menus.each do |menu| %>
+    <%= menu.name %>
+    <%= menu.fee %>
+    <%= link_to "削除", menu_path(id: menu.id), method: :delete %>
+  <% end %>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
 <% else %>
   <!-- ユーザーがログインしていなかった時の処理 -->
