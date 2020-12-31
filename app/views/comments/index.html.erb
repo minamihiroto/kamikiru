@@ -43,6 +43,7 @@
   <% @menus.each do |menu| %>
     <%= menu.name %>
     <%= menu.fee %>
+    <%= "円" %>
     <%= link_to "削除", menu_path(id: menu.id), method: :delete %>
   <% end %>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
