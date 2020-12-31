@@ -7,7 +7,7 @@ class MachingsController < ApplicationController
       requesting = current_user.request(@user)
       if requesting.save
         flash[:success] = 'ユーザーに依頼しました'
-        Notification.create(notification_user_id: @user.id, notification_notification_type_id: 1)
+        Notification.create(notification_user_id: @user.id, notification_type_id: 1)
         redirect_to comments_main_path
       else
         flash.now[:alert] = '依頼に失敗しました'
@@ -22,7 +22,7 @@ class MachingsController < ApplicationController
       maching = current_user.reverse_of_machings.find_by(id: params[:id])
       maching.update(aggree: true)
       recive_notice_user = maching.request_user_id
-      Notification.create(notification_user_id: recive_notice_user, notification_notification_type_id: 2)
+      Notification.create(notification_user_id: recive_notice_user, notification_type_id: 2)
       redirect_to root_path
     end
 

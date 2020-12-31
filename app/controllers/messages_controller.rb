@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
         @maching = Maching.find(params[:message][:message_maching_id])
         # recive_notice_userの中身は、@maching.request_userがログインユーザーであれば => 通知を受ける人は、依頼された人、@maching.request_userがログインユーザーでなければ =>通知を受ける人は、依頼した人と言うことになっている
         recive_notice_user = @maching.request_user == current_user ? @maching.requested_user : @maching.request_user
-        Notification.create(notification_user_id: recive_notice_user.id, notification_notification_type_id: 3, notification_maching_id: params[:message][:message_maching_id], notification_message_id: @message.id)
+        Notification.create(notification_user_id: recive_notice_user.id, notification_type_id: 3, notification_maching_id: params[:message][:message_maching_id], notification_message_id: @message.id)
         redirect_to maching_path(@message.message_maching_id)
     end
 end
