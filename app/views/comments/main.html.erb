@@ -22,10 +22,16 @@
         <%= "円" %>
       <% end%>
       <%# 依頼ボタン %>
-      <% if current_user.requesting?(user) %>
+      <% if current_user.approving?(user) %>
+        <% user.machings.where(aggree: true, requested_user_id: current_user.id).each do |maching| %>
+            <%= link_to "承認済み DMへ", maching_path(maching.id) %>
+        <% end%>
+      <% elsif current_user.approved?(user) %>
+        <% user.reverse_of_machings.where(aggree: true, request_user_id: current_user.id).each do |maching| %>
+            <%= link_to "承認されました DMへ", maching_path(maching.id) %>
+        <% end%>
+      <% elsif current_user.requesting?(user) %>
         <%= "すでに依頼済みです" %>
-      <% elsif current_user.approving?(user) %>
-        <%= "承認済みです" %>
       <% elsif current_user.requested?(user) %>
         <%= "依頼されています" %>
         <!-- maching_pathはルートで定義したmachings#updateのパスである -->

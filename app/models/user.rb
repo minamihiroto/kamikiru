@@ -57,9 +57,13 @@ class User < ApplicationRecord
   end
 
   def approving?(other_user)
-    # 自分がother_userに承認ボタンが押されているかどうかを確認する
+    # 自分が承認ボタンを押しているかどうかを確認する
     # find_byは存在するかしないか（nill）を返す
     # exists?は存在してたらtrueしてなかったらfalseで返すメソッド
     self.reverse_of_machings.exists?(request_user: other_user, aggree: true)
+  end
+
+  def approved?(other_user)
+    self.machings.exists?(requested_user: other_user, aggree: true)
   end
 end
