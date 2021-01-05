@@ -53,3 +53,14 @@ gem 'devise'
 # エラー出たらdocker-compose buildをまず試すそれでもダメなら↓
 # bundleエラー出たらコメントアウトしてdockerを立ち上げて、中に入ってからbundle installする
 gem 'active_hash'
+
+group :development, :test do
+ gem 'capistrano'
+ gem 'capistrano-bundler'
+ gem 'capistrano-rails'
+ gem 'capistrano-rbenv'
+end
+
+group :production, :staging do
+  gem 'unicorn'
+end
