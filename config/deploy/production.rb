@@ -62,4 +62,4 @@
 
 server '54.248.127.99', user: 'ec2-user', roles: %w{app db web}
 
-set :ssh_options, keys: '/root/.ssh/kamikiru_key_rsa'
+set :ssh_options, keys: '/Users/hiroto/.ssh/kamikiru-aws.pem'
