@@ -3,9 +3,44 @@
 <% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
   <!-- ユーザーがログインしていた時の処理 -->
   <% @users.each do |user| %>
-    <h4> 名前： <%= user.name %> </h4>
-    <h4> メールアドレス： <%= user.email %> </h4>
-  <%end%>
+    <% if user == current_user %>
+    <%# 自分を非表示にする %>
+    <% else %>
+      <% if flash[:success] %>
+        <%= flash[:success] %>
+      <% elsif flash[:alert] %>
+        <%= flash[:alert] %>
+      <% end %>
+      <% user.images.each do |image| %>
+        <%= image_tag image %>
+      <% end %>
+      <h4> 名前： <%= user.name %> </h4>
+      <h4> メールアドレス： <%= user.email %> </h4>  
+      <% user.menus.each do |menu| %>
+        <%= menu.name %>
+        <%= menu.fee %>
+        <%= "円" %>
+      <% end%>
+      <%# 依頼ボタン %>
+      <% if current_user.approving?(user) %>
+        <% user.machings.where(aggree: true, requested_user_id: current_user.id).each do |maching| %>
+            <%= link_to "承認済み DMへ", maching_path(maching.id) %>
+        <% end%>
+      <% elsif current_user.approved?(user) %>
+        <% user.reverse_of_machings.where(aggree: true, request_user_id: current_user.id).each do |maching| %>
+            <%= link_to "承認されました DMへ", maching_path(maching.id) %>
+        <% end%>
+      <% elsif current_user.requesting?(user) %>
+        <%= "すでに依頼済みです" %>
+      <% elsif current_user.requested?(user) %>
+        <%= "依頼されています" %>
+        <!-- maching_pathはルートで定義したmachings#updateのパスである -->
+        <%= link_to "承認する", maching_path(current_user.reverse_of_machings.find_by(request_user_id: user.id)), method: :put %>
+      <% else %>
+        <%= render 'machings/request_button', user: user %>
+      <% end %>
+    <% end %>
+  <% end %>
   <%= link_to "プロフィール", root_path %>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
 <% else %>

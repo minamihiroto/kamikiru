@@ -7,7 +7,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 RUN apt-get update -qq && \
   apt-get install -y build-essential \
   libpq-dev \
-  nodejs yarn
+  nodejs yarn vim
 
 # 作業ディレクトリの作成、設定
 RUN mkdir /app_name

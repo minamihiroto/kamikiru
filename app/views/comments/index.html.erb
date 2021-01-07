@@ -3,8 +3,53 @@
 <% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
   <!-- ユーザーがログインしていた時の処理 -->
   <h2> 現在 <%= current_user.name %> さんがログインしています </h2> <!-- ここを追加します -->
+  <% current_user.images.each do |image| %>
+    <%= image_tag image %>
+  <% end %>
   <h4> メールアドレス： <%= current_user.email %> </h4>
+  <%= link_to "プロフィール編集",  edit_user_registration_path %>
   <%= link_to "ユーザー一覧", comments_main_path %>
+  <%=  "依頼済みのユーザー"%>
+  <% @request_user.each do |user| %>
+    <%= user.name %>
+  <% end %>
+  <%= "依頼してきたユーザー" %>
+  <% @requested_user.each do |user| %>
+    <%= user.name %>
+  <% end %>
+  <%= "マッチング済みユーザー" %>
+  <% @approve_requested_user.each do |user| %>
+    <% user.machings.where(aggree: true, requested_user_id: current_user.id).each do |maching| %>
+      <%= link_to "#{user.name}", maching_path(maching.id) %>
+    <% end%>
+  <%end%>
+  <% @approve_request_user.each do |user| %>
+    <% user.reverse_of_machings.where(aggree: true, request_user_id: current_user.id).each do |maching| %>
+      <%= link_to "#{user.name}", maching_path(maching.id) %>
+    <% end%>
+  <%end%>
+  <% if current_user.notifications.where(notification_read: false).present? %>
+    <%= link_to "通知", notifications_path, style: 'color: red;' %>
+    <span style = "color: red;"><%= current_user.notifications.where(notification_read: false).size %></span>
+  <% else %>
+    <%= link_to "通知", notifications_path %>
+  <% end %>
+  <%= form_with model: @menu, local: true do |f| %>
+    <%= f.label :name, "メニュー名" %>
+    <%= f.text_field :name %>
+    <%= f.label :fee, "金額" %>
+    <%= f.number_field :fee %>
+    <%= f.submit "メニュー作成" %>
+    <% @menu.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  <% end %>
+  <% @menus.each do |menu| %>
+    <%= menu.name %>
+    <%= menu.fee %>
+    <%= "円" %>
+    <%= link_to "削除", menu_path(id: menu.id), method: :delete %>
+  <% end %>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
 <% else %>
   <!-- ユーザーがログインしていなかった時の処理 -->
