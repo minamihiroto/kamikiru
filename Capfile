@@ -7,7 +7,7 @@ require 'capistrano/rails/migrations'
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
 
-# require 'capistrano3/unicorn'
+require 'capistrano3/unicorn'
 # require 'capistrano/rvm'
 # require 'capistrano/chruby'
 # require 'capistrano/passenger'
