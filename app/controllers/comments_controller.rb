@@ -13,10 +13,6 @@ class CommentsController < ApplicationController
   end
 
   def main
-    if current_user.flag
-      @users = User.where(flag: false)
-    else
-      @users = User.where(flag: true)
-    end
+    @menus = Menu.search(params[:keyword])
   end
 end

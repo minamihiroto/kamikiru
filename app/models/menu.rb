@@ -4,6 +4,14 @@ class Menu < ApplicationRecord
 
   validate :user_has_limit_menus
 
+  def self.search(keyword)
+    if keyword
+      where(['name LIKE ?', "%#{keyword}%"])
+    else
+      Menu.all
+    end
+  end
+
   private
   def user_has_limit_menus
     if user.menus.count >= MAX_POSTS_COUNT
