@@ -1,0 +1,8 @@
+<%= form_with local: true, url: cards_path do |form| %>
+  <script
+    type="text/javascript"
+    src="https://checkout.pay.jp"
+    class="payjp-button"
+    data-key="<%= Rails.application.credentials.payjp[:public_key] %>">
+  </script>
+<% end %>

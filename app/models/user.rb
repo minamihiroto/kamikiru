@@ -26,6 +26,8 @@ class User < ApplicationRecord
 
   has_many :menus
 
+  has_one :card
+
   def request(other_user)
     # selfはこの定義を呼び出したユーザーのこと
     # 自分にリクエスト送らないようにする記述

@@ -23,6 +23,12 @@ class MachingsController < ApplicationController
       maching.update(aggree: true)
       recive_notice_user = maching.request_user_id
       Notification.create(notification_user_id: recive_notice_user, notification_type_id: 2)
+      Payjp::Charge.create(
+        amount: 550,
+        card: params['payjp-token'], # フォームを送信すると作成・送信されてくるトークン
+        currency: 'jpy',
+        customer: maching.request_user
+      )
       redirect_to root_path
     end
 
