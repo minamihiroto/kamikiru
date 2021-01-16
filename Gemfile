@@ -57,6 +57,8 @@ gem 'active_hash'
 gem 'ed25519', '>= 1.2', '< 2.0'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 
+gem 'payjp'
+
 group :development, :test do
  gem 'capistrano'
  gem 'capistrano-bundler'
