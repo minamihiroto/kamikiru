@@ -1,5 +1,6 @@
 class MachingsController < ApplicationController
     before_action :set_user,only:[:create]
+    before_action :card_exist,only:[:create]
 
     def create
       # 依頼アクション
@@ -25,9 +26,8 @@ class MachingsController < ApplicationController
       Notification.create(notification_user_id: recive_notice_user, notification_type_id: 2)
       Payjp::Charge.create(
         amount: 550,
-        card: params['payjp-token'], # フォームを送信すると作成・送信されてくるトークン
         currency: 'jpy',
-        customer: maching.request_user
+        customer: maching.request_user.card.customer_id
       )
       redirect_to root_path
     end
@@ -60,5 +60,11 @@ class MachingsController < ApplicationController
     def set_user
         # リクエストされるユーザーのデータが入る
         @user = User.find params[:request_user_id]
+    end
+
+    def card_exist
+      unless current_user.card
+        redirect_to root_path, alert: "クレジットカードを登録してください"
+      end
     end
 end
